@@ -1,8 +1,5 @@
-import React from "react";
-
+import { useNavigate } from "react-router-dom";
 import { Avatar, Box, VStack, IconButton, Tooltip } from "@chakra-ui/react";
-
-import axios, { AxiosError } from "axios";
 
 import { BsPerson, BsSun, BsMoon } from "react-icons/bs";
 import { BiMessageAltDetail } from "react-icons/bi";
@@ -11,16 +8,11 @@ import { IoMdNotificationsOutline } from "react-icons/io";
 import { IoSettingsOutline, IoLogOutOutline } from "react-icons/io5";
 
 const NavBar = () => {
+  const navigate = useNavigate();
   const handleLogout = async (e: any) => {
     e.preventDefault();
-    try {
-      const { data } = await axios.delete("/api/logout");
-      console.log(data);
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        console.log(error);
-      }
-    }
+    localStorage.removeItem("token");
+    navigate("/");
   };
 
   return (

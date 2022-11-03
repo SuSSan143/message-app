@@ -1,5 +1,5 @@
 import { useState, ChangeEvent } from "react";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 import { AxiosError } from "axios";
 
 import {
@@ -38,7 +38,7 @@ const SignIn = () => {
     password: "",
   });
   const toast = useToast();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleUserInput = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -64,13 +64,14 @@ const SignIn = () => {
       toast.closeAll();
       toast({
         title: "Success",
-        description: "Please wait, we will log you in.",
+        description: "Please wait, we will log you in soon.",
         position: "top-left",
         status: "success",
         duration: 3000,
         isClosable: true,
       });
-      navigate(`/${data.user}`)
+      localStorage.setItem("token", data.token);
+      navigate(`/${data.username}`);
     } catch (err) {
       if (err instanceof AxiosError) {
         const { error } = err.response?.data;
@@ -83,6 +84,7 @@ const SignIn = () => {
           duration: 3000,
           isClosable: true,
         });
+        navigate("/");
       }
     }
     setIsLoading(false);

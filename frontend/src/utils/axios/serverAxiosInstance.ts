@@ -8,7 +8,7 @@ const BASEURL = IS_BACKEND_LIVE
 
 export default axios.create({
   baseURL: BASEURL,
-  // headers: {
-  //   "Content-type": "application/json",
-  // },
+  headers: {
+    "x-access-token": localStorage.getItem("token"),
+  },
 });

@@ -1,5 +1,5 @@
 import { ChangeEvent, useState } from "react";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 import {
   Box,
   chakra,
@@ -33,7 +33,7 @@ const SignUp = () => {
   });
   const [isLoading, setIsLoading] = useState(false);
   const toast = useToast();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -65,7 +65,8 @@ const SignUp = () => {
         username: userData.username,
         password: userData.password,
       });
-      navigate(`/${data.user}`)
+      localStorage.setItem("token", data.token);
+      navigate(`/${data.user}`);
     } catch (err) {
       if (err instanceof AxiosError) {
         const { error } = err.response?.data;
